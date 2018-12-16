@@ -31,11 +31,9 @@ export const signIn = ({ email, password }) => {
         dispatch({ type: SIGN_USER });
         AuthRepository.signIn(email, password)
             .then(user => {
-                debugger
                 dispatch({ type: SIGN_USER_SUCCESS, payload: user });
             })
             .catch(error => {
-                debugger
                 dispatch({ type: SIGN_USER_FAIL })
             });
     }

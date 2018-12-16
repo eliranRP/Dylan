@@ -4,5 +4,6 @@ export default User = {
     name: '',
     email: '',
     profileImage: '',
+    loginAt: firebase.database.ServerValue.TIMESTAMP,
     timestamp: firebase.database.ServerValue.TIMESTAMP
 }

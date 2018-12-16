@@ -12,5 +12,10 @@ export default UserController = {
         return firebase.database().ref(USER).child(User.id)
             .set(User)
             .then(() => firebaseUser);
+    },
+    update: (user) => {
+        return firebase.database().ref(USER).child(User.id)
+            .update(User)
     }
+
 }

@@ -10,8 +10,7 @@ export default AuthRepository = {
     },
     signIn: async (email, password) => {
         let {user} = await AuthApi.signIn(email, password);
-        debugger
-        return UserController.create(user)//Create user in firestore
+        return UserController.create(user)//Create user in firebase
     }
 }
 
