@@ -7,24 +7,32 @@ const data = [{ key: '1' }, { key: '2' }, { key: '3' }, { key: '4' }, { key: '5'
 const ImageSlider = ({ style, images }) => {
 
     const _renderItem = ({ item }) => {
-        return <Avatar
-            xlarge
-            source={{ uri: "https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg" }}
-            onPress={() => console.log("Works!")}
-            activeOpacity={0.7}
-        />
+        return (
+            <View style={styles.image}>
+                <Avatar
+                    xlarge
+                    source={{ uri: "https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg" }}
+                    onPress={() => console.log("Works!")}
+                    activeOpacity={0.7}
+                />
+            </View>
+        )
     }
 
 
     return (
-        <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <FlatList
-                data={data}
-                horizontal
-                keyExtractor={(item) => item.key}
-                renderItem={_renderItem}
-            />
-        </View>
+        <FlatList
+            data={data}
+            horizontal
+            keyExtractor={(item) => item.key}
+            renderItem={_renderItem}
+        />
     )
+}
+
+const styles = {
+    image: {
+        marginRight: 5
+    }
 }
 export { ImageSlider }
