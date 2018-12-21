@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { TouchableOpacity, ScrollView, View } from 'react-native'
-import { CheckBox, Icon, Text } from 'react-native-elements'
+import { CheckBox, Icon, Text, Divider } from 'react-native-elements'
 import { FormComponent, Row, Col } from '../../../Components/common'
 import Colors from '../../../res/values/colors'
-
+import ToggleSwitch from 'toggle-switch-react-native'
 
 
 export default class ContactForm extends Component {
@@ -11,10 +11,16 @@ export default class ContactForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            adoption: false,
-            Omna: false,
+            adoption: true,
+            Omna: true,
             calls: true,
-            share: false,
+            share: true,
+            visible: true,
+            adopted: false,
+            inOmna: false,
+            isOnDefaultToggleSwitch: true,
+            isOnLargeToggleSwitch: false,
+            isOnBlueToggleSwitch: false,
         }
     }
 
@@ -22,7 +28,7 @@ export default class ContactForm extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ScrollView style={styles.container}>
+                <ScrollView style={[styles.container, { marginTop: 20 }]}>
                     <FormComponent
                         label='Contact name'
                         placeholder='Dylan'
@@ -41,9 +47,8 @@ export default class ContactForm extends Component {
                         autoCorrect={false}
                         errorMessage='someError'
                     />
-
-
-                    <Text style={{ fontSize: 18, marginTop: 50 }}> The purpose of the post ?</Text>
+                    <Divider style={{ marginTop: 40, marginBottom: 5 }} />
+                    <Text style={{ fontSize: 18, marginTop: 15 }}> The purpose of the post ?</Text>
                     <Col style={styles.row}>
                         <CheckBox
                             checkedColor={Colors.colorPrimary}
@@ -62,8 +67,8 @@ export default class ContactForm extends Component {
                         />
 
                     </Col>
-
-                    <Text style={{ fontSize: 18, marginTop: 50 }}> Post availability</Text>
+                    <Divider style={{ marginTop: 10, marginBottom: 15 }} />
+                    <Text style={{ fontSize: 18, marginTop: 5 }}> Post availability</Text>
                     <Col style={styles.row}>
 
                         <CheckBox
@@ -82,10 +87,34 @@ export default class ContactForm extends Component {
 
 
                     </Col>
-
+                    <Divider style={{ marginTop: 5, marginBottom: 5 }} />
+                    <Text style={{ fontSize: 18, marginTop: 5 }}> Post visibility</Text>
+                    <Col style={styles.row}>
+                        <CheckBox
+                            checkedColor={Colors.colorPrimary}
+                            containerStyle={styles.checkBox}
+                            title='Visible'
+                            onPress={() => this.setState({ ...this.state, visible: !this.state.visible })}
+                            checked={this.state.visible}
+                        />
+                        <CheckBox
+                            checkedColor={Colors.colorPrimary}
+                            containerStyle={styles.checkBox}
+                            title='Adopted'
+                            onPress={() => this.setState({ ...this.state, adopted: !this.state.adopted })}
+                            checked={this.state.adopted}
+                        />
+                        <CheckBox
+                            checkedColor={Colors.colorPrimary}
+                            containerStyle={styles.checkBox}
+                            title='In omna'
+                            onPress={() => this.setState({ ...this.state, inOmna: !this.state.inOmna })}
+                            checked={this.state.inOmna}
+                        />
+                    </Col>
+                    <Divider style={{ marginTop: 5, marginBottom: 5 }} />
                 </ScrollView>
-
-                <Row style={styles.footer} pointerEvents='none'> 
+                <Row style={styles.footer} pointerEvents='none'>
                     <TouchableOpacity>
                         <Icon
                             size={35}
@@ -106,7 +135,7 @@ const styles = {
         paddingLeft: 10,
         flex: 1,
         flexDirection: 'column',
-        paddingTop: 50,
+        paddingTop: 10,
         backgroundColor: 'white',
 
 
@@ -116,19 +145,7 @@ const styles = {
         borderWidth: 0
     },
     row: {
-        marginTop: 20,
-    },
-    textAreaContainer: {
-        marginTop: 20,
-        marginRight: 20,
-        marginLeft: 20,
-        borderColor: '#bdc6cf',
-        borderWidth: 1,
-        padding: 5
-    },
-    textArea: {
-        height: 150,
-        justifyContent: "flex-start"
+        marginTop: 10,
     },
     footer: {
         position: 'absolute',
