@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
-import { ImageSlider } from './ImageSlider';
 import { Text, Icon, ButtonGroup } from 'react-native-elements';
-import { CardSection, Row } from '../../../Components/common';
+import { CardSection, Row, ImageSlider } from '../../../Components/common';
 import Style from '../../../res/values/style'
 import Colors from '../../../res/values/colors'
 
