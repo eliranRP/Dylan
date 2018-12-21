@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from '../src/Reducers'
 import Router from './Router'
 import firebase from "firebase"
@@ -26,7 +26,7 @@ export default class App extends Component {
   }
 
 
-  render() {    
+  render() {
     return (
       <Provider store={store}>
         <Router />
