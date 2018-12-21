@@ -9,11 +9,13 @@ const renderError = (error, errorMessage) => {
     }
 }
 
-const FormComponent = ({ label, onChangeText, errorMessage, error, placeholder, autoCorrect, secureTextEntry }) => {
+const FormComponent = ({ label, onChangeText, errorMessage, error, placeholder, autoCorrect, secureTextEntry, numberOfLines, multiline, style }) => {
     return (
-        <View>
+        <View style={style}>
             <FormLabel>{label}</FormLabel>
             <FormInput
+                multiline={multiline}
+                numberOfLines={numberOfLines}
                 secureTextEntry={secureTextEntry}
                 autoCorrect={autoCorrect}
                 placeholder={placeholder}
