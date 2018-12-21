@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList } from 'react-native'
-import { ImageSlider } from '../components/ImageSlider';
+import { View, FlatList } from 'react-native'
 import { FeedCardItem } from '../components';
 import TimerMixin from 'react-timer-mixin';
 
