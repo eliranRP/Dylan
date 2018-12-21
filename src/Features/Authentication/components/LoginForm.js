@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { connect } from 'react-redux';
 import { FormComponent, Spinner } from '../../../Components/common'
 import { Button } from 'react-native-elements'
-import { emailChanged, passwordChanged, loginUser, signIn } from '../actions/AuthActions'
+import { emailChanged, passwordChanged, signInOrLogin } from '../actions/AuthActions'
 
 class LoginForm extends Component {
 
@@ -15,21 +15,25 @@ class LoginForm extends Component {
         this.props.passwordChanged(text);
     }
 
-    _onLogin() {
+    _onSignIn() {
         const { email, password } = this.props;
-        this.props.signIn({ email, password });
+        this.props.signInOrLogin({ email, password });
     }
 
     _renderButton() {
         if (this.props.loading) {
-            return <Spinner size="large" />;
+            return (
+                <View style={styles.spinner}>
+                    <Spinner size="large" />
+                </View>
+            );
         }
 
         return (
             <Button
                 buttonStyle={styles.submit}
                 title='Login'
-                onPress={this._onLogin.bind(this)} />
+                onPress={this._onSignIn.bind(this)} />
         );
     }
 
@@ -56,6 +60,10 @@ class LoginForm extends Component {
                     errorMessage='someError'
                     secureTextEntry={true}
                 />
+
+                <Text style={styles.errorTextStyle}>
+                    {this.props.error}
+                </Text>
                 {this._renderButton()}
             </View>
         )
@@ -63,8 +71,8 @@ class LoginForm extends Component {
 }
 const styles = {
     container: {
-        flexDirection: 'column',
         flex: 1,
+        flexDirection: 'column',
         justifyContent: 'center',
 
     },
@@ -78,7 +86,16 @@ const styles = {
         marginTop: 50,
         borderRadius: 5,
         backgroundColor: '#0095fb',
+    },
+    spinner: {
+        marginTop: 50,
+    },
+    errorTextStyle: {
+        fontSize: 13,
+        alignSelf: 'center',
+        color: 'red'
     }
+
 
 }
 const mapStateToProps = ({ auth }) => {
@@ -88,5 +105,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, {
-    emailChanged, passwordChanged, loginUser, signIn
+    emailChanged, passwordChanged, signInOrLogin
 })(LoginForm);

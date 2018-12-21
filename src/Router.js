@@ -9,6 +9,9 @@ const RouterComponent = () => {
             <Scene key="auth">
                 <Scene key="login" component={LoginContainer} title="Please Login" />
             </Scene>
+            <Scene key="main">
+                <Scene key="feed"></Scene>
+            </Scene>
         </Router>
     );
 };

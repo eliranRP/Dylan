@@ -7,8 +7,8 @@ import {
 } from '../types';
 
 const INITIAL_STATE = {
-    email: '',
-    password: '',
+    email: 'test@test.com',
+    password: '123455',
     user: null,
     error: '',
     loading: false
@@ -23,9 +23,9 @@ export default (state = INITIAL_STATE, action) => {
         case SIGN_USER:
             return { ...state, loading: true, error: '' };
         case SIGN_USER_SUCCESS:
-            return { ...state, ...INITIAL_STATE, user: action.payload };
+            return { ...state, ...INITIAL_STATE, user: action.payload, loading: false };
         case SIGN_USER_FAIL:
-            return { ...state, error: 'Authentication Failed.', password: '', loading: false };
+            return { ...state, error: action.payload, password: '', loading: false };
         default:
             return state;
     }

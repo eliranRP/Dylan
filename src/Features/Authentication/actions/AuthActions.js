@@ -26,27 +26,15 @@ export const passwordChanged = (text) => {
     };
 };
 
-export const signIn = ({ email, password }) => {
+export const signInOrLogin = ({ email, password }) => {
     return (dispatch) => {
         dispatch({ type: SIGN_USER });
-        AuthRepository.signIn(email, password)
+        AuthRepository.signInOrLogin(email, password)
             .then(user => {
                 dispatch({ type: SIGN_USER_SUCCESS, payload: user });
             })
             .catch(error => {
-                dispatch({ type: SIGN_USER_FAIL })
+                dispatch({ type: SIGN_USER_FAIL, payload: error.message })
             });
     }
 }
-
-export const loginUser = ({ email, password }) => {
-    return (dispatch) => {
-        dispatch({ type: LOGIN_USER });
-        AuthRepository.login(email, password)
-            .then(user => {
-                dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
-            })
-            .catch(error => { dispatch({ type: LOGIN_USER_FAIL }) });
-    };
-};
-

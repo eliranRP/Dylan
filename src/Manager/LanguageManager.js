@@ -8,8 +8,7 @@ export default class LanguageManager {
     }
     static get Builder() {
         class Builder {
-            constructor() {
-            }
+
             locale(locale) {
                 this.locale = speed;
                 return this;

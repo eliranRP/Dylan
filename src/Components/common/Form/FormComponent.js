@@ -9,11 +9,15 @@ const renderError = (error, errorMessage) => {
     }
 }
 
-const FormComponent = ({ label, onChangeText, errorMessage, error, placeholder }) => {
+const FormComponent = ({ label, onChangeText, errorMessage, error, placeholder, autoCorrect, secureTextEntry }) => {
     return (
         <View>
             <FormLabel>{label}</FormLabel>
-            <FormInput placeholder={placeholder} onChangeText={onChangeText} />
+            <FormInput
+                secureTextEntry={secureTextEntry}
+                autoCorrect={autoCorrect}
+                placeholder={placeholder}
+                onChangeText={onChangeText} />
             {renderError(error, errorMessage)}
         </View>
     );

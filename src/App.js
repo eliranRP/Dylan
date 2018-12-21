@@ -6,6 +6,11 @@ import Router from './Router'
 import firebase from "firebase"
 import ReduxThunk from 'redux-thunk';
 
+console.disableYellowBox = true;
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(ReduxThunk)));
+
 export default class App extends Component {
   componentWillMount() {
     // Initialize Firebase
@@ -21,8 +26,7 @@ export default class App extends Component {
   }
 
 
-  render() {
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+  render() {    
     return (
       <Provider store={store}>
         <Router />
