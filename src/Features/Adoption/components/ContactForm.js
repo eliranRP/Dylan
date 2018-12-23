@@ -1,29 +1,21 @@
 import React, { Component } from 'react'
 import { TouchableOpacity, ScrollView, View } from 'react-native'
 import { CheckBox, Icon, Text, Divider } from 'react-native-elements'
-import { FormComponent, Row, Col } from '../../../Components/common'
+import { FormComponent, Footer, Col } from '../../../Components/common'
 import Colors from '../../../res/values/colors'
-import ToggleSwitch from 'toggle-switch-react-native'
+import { checkboxUpdated, contactNameChanged, phoneChanged } from '../actions/contactFormAction'
+import { connect } from 'react-redux';
+
+class ContactForm extends Component {
 
 
-export default class ContactForm extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            adoption: true,
-            Omna: true,
-            calls: true,
-            share: true,
-            visible: true,
-            adopted: false,
-            inOmna: false,
-            isOnDefaultToggleSwitch: true,
-            isOnLargeToggleSwitch: false,
-            isOnBlueToggleSwitch: false,
-        }
+    _onContactNameChanged(name) {
+        this.props.contactNameChanged(name)
     }
 
+    _onPhoneChange(phone) {
+        this.props.phoneChanged(phone)
+    }
 
     render() {
         return (
@@ -32,8 +24,8 @@ export default class ContactForm extends Component {
                     <FormComponent
                         label='Contact name'
                         placeholder='Dylan'
-                        // value={this.props.email}
-                        // onChangeText={(value) => this._onEmailChange(value)}
+                        value={this.props.contactName}
+                        onChangeText={(value) => this._onContactNameChanged(value)}
                         error={false}
                         autoCorrect={false}
                         errorMessage='someError'
@@ -41,8 +33,8 @@ export default class ContactForm extends Component {
                     <FormComponent
                         label='Phone numer'
                         placeholder='054123456'
-                        // value={this.props.email}
-                        // onChangeText={(value) => this._onEmailChange(value)}
+                        value={this.props.phone}
+                        onChangeText={(value) => this._onPhoneChange(value)}
                         error={false}
                         autoCorrect={false}
                         errorMessage='someError'
@@ -53,17 +45,17 @@ export default class ContactForm extends Component {
                         <CheckBox
                             checkedColor={Colors.colorPrimary}
                             containerStyle={styles.checkBox}
-                            onPress={() => this.setState({ ...this.state, Omna: !this.state.Omna })}
+                            onPress={() => this.props.checkboxUpdated({ prop: 'Omna', value: !this.props.Omna })}
                             title='Omna'
-                            checked={this.state.Omna}
+                            checked={this.props.Omna}
                         />
 
                         <CheckBox
                             checkedColor={Colors.colorPrimary}
                             containerStyle={styles.checkBox}
                             title='Adoption'
-                            onPress={() => this.setState({ ...this.state, adoption: !this.state.adoption })}
-                            checked={this.state.adoption}
+                            onPress={() => this.props.checkboxUpdated({ prop: 'adoption', value: !this.props.adoption })}
+                            checked={this.props.adoption}
                         />
 
                     </Col>
@@ -75,8 +67,8 @@ export default class ContactForm extends Component {
                             checkedColor={Colors.colorPrimary}
                             containerStyle={styles.checkBox}
                             title='Share'
-                            onPress={() => this.setState({ ...this.state, share: !this.state.share })}
-                            checked={this.state.share}
+                            onPress={() => this.props.checkboxUpdated({ prop: 'share', value: !this.props.share })}
+                            checked={this.props.share}
                         />
                         <CheckBox
                             checkedColor={Colors.colorPrimary}
@@ -94,28 +86,29 @@ export default class ContactForm extends Component {
                             checkedColor={Colors.colorPrimary}
                             containerStyle={styles.checkBox}
                             title='Visible'
-                            onPress={() => this.setState({ ...this.state, visible: !this.state.visible })}
-                            checked={this.state.visible}
+                            onPress={() => this.props.checkboxUpdated({ prop: 'visible', value: !this.props.visible })}
+                            checked={this.props.visible}
                         />
                         <CheckBox
                             checkedColor={Colors.colorPrimary}
                             containerStyle={styles.checkBox}
                             title='Adopted'
-                            onPress={() => this.setState({ ...this.state, adopted: !this.state.adopted })}
-                            checked={this.state.adopted}
+                            onPress={() => this.props.checkboxUpdated({ prop: 'adopted', value: !this.props.adopted })}
+                            checked={this.props.adopted}
                         />
                         <CheckBox
                             checkedColor={Colors.colorPrimary}
                             containerStyle={styles.checkBox}
                             title='In omna'
-                            onPress={() => this.setState({ ...this.state, inOmna: !this.state.inOmna })}
-                            checked={this.state.inOmna}
+                            onPress={() => this.props.checkboxUpdated({ prop: 'inOmna', value: !this.props.inOmna })}
+                            checked={this.props.inOmna}
+
                         />
                     </Col>
                     <Divider style={{ marginTop: 5, marginBottom: 5 }} />
                 </ScrollView>
-                <Row style={styles.footer} pointerEvents='none'>
-                    <TouchableOpacity>
+                <Footer>
+                    <TouchableOpacity >
                         <Icon
                             size={35}
                             raised
@@ -123,7 +116,7 @@ export default class ContactForm extends Component {
                             name='navigate-next'
                             color='#f50' />
                     </TouchableOpacity>
-                </Row>
+                </Footer>
             </View>
 
         )
@@ -147,16 +140,33 @@ const styles = {
     row: {
         marginTop: 10,
     },
-    footer: {
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
-        justifyContent: 'flex-end',
-        marginBottom: 50,
-        paddingRight: 20,
-        paddingLeft: 20,
-    },
     scrollView: {
         paddingBottom: 200,
     }
 }
+const mapStateToProps = ({ contactForm }) => {
+    const {
+        adoption,
+        Omna,
+        calls,
+        share,
+        visible,
+        adopted,
+        inOmna,
+        contactName,
+        phone } = contactForm;
+
+    return {
+        adoption,
+        Omna,
+        calls,
+        share,
+        visible,
+        adopted,
+        inOmna,
+        contactName,
+        phone
+    };
+};
+
+export default connect(mapStateToProps, { checkboxUpdated, contactNameChanged, phoneChanged })(ContactForm);

@@ -2,14 +2,12 @@
 import {
     EMAIL_CHANGED,
     PASSWORD_CHANGED,
-    LOGIN_USER_SUCCESS,
-    LOGIN_USER_FAIL,
-    LOGIN_USER,
     SIGN_USER,
     SIGN_USER_SUCCESS,
     SIGN_USER_FAIL
 } from '../types';
 import AuthRepository from '../../../Repository/AuthRepository'
+import { Actions } from 'react-native-router-flux';
 
 
 export const emailChanged = (text) => {
@@ -31,6 +29,7 @@ export const signInOrLogin = ({ email, password }) => {
         dispatch({ type: SIGN_USER });
         AuthRepository.signInOrLogin(email, password)
             .then(user => {
+                Actions.main({ user })
                 dispatch({ type: SIGN_USER_SUCCESS, payload: user });
             })
             .catch(error => {

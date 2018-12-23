@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { TouchableOpacity, View, TextInput, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { FormComponent, Row } from '../../../Components/common'
+import Footer from '../../../Components/common/Containers/Footer';
 
 
 
@@ -47,7 +48,7 @@ export default class AdoptionForm extends Component {
                     </ScrollView>
 
 
-                    <Row style={styles.footer}>
+                    <Footer style={{ left: 0 }}>
                         <TouchableOpacity>
                             <Icon
                                 size={35}
@@ -65,7 +66,7 @@ export default class AdoptionForm extends Component {
                                 name='done'
                                 color='#f50' />
                         </TouchableOpacity>
-                    </Row>
+                    </Footer>
                 </KeyboardAvoidingView>
 
             </View>
@@ -95,16 +96,6 @@ const styles = {
     textArea: {
         height: 350,
         justifyContent: "flex-start"
-    },
-    footer: {
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
-        left: 0,
-        justifyContent: 'space-between',
-        marginBottom: 50,
-        paddingRight: 20,
-        paddingLeft: 20,
     },
     scrollView: {
         flex: 1,

@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import { View, FlatList } from 'react-native'
+import { View, FlatList, TouchableOpacity } from 'react-native'
 import { FeedCardItem } from '../components';
-import TimerMixin from 'react-timer-mixin';
+import { Footer } from '../../../Components/common';
+import { Icon } from 'react-native-elements';
+import Colors from '../../../res/values/colors'
+import { connect } from 'react-redux';
+import { addPost } from '../actions/FeedActions'
 
 
 
@@ -13,14 +17,15 @@ const createData = () => {
 }
 
 
-export default class Feed extends Component {
+class Feed extends Component {
+
+
     constructor(props) {
         super(props)
         createData()
-        // TimerMixin.setTimeout(() => {
-        //     this._flatlist.scrollToEnd({ animate: true})
-        // }, 2000)
     }
+
+
     _renderFeedItem({ item }) {
         return <FeedCardItem item={item} />
     }
@@ -34,7 +39,27 @@ export default class Feed extends Component {
                     keyExtractor={(item) => item.key + ''}
                     renderItem={this._renderFeedItem}
                 />
+                <Footer>
+                    <TouchableOpacity
+                        onPress={this.props.addPost}
+                    >
+                        <Icon
+                            size={35}
+                            raised
+                            reverse
+                            name='plus'
+                            type='feather'
+                            color={Colors.colorPrimary} />
+                    </TouchableOpacity>
+                </Footer>
             </View>
         )
     }
 }
+const mapStateToProps = ({ feed }) => {
+    const { posts } = feed;
+
+    return { posts };
+};
+
+export default connect(mapStateToProps, { addPost })(Feed);
