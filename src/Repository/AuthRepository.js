@@ -1,9 +1,12 @@
 import AuthApi from '../Api/Authentication/AuthenticationApi'
-import UserDbController from '../db/UserController'
+import UserController from '../db/UserController';
 
 export default AuthRepository = {
+    authenticate: () => {
+;
+    },
     login: (email, password) => login(email, password),
-    logout: () => AuthApi.logout(),
+    logout:  () =>  AuthApi.logout(),
     signIn: (email, password) => signIn(email, password),
     signInOrLogin: (email, password) => signInOrLogin(email, password),
 }
@@ -18,7 +21,7 @@ const signInOrLogin = (email, password) => {
 const signIn = (email, password) => {
     return AuthApi.signIn(email, password)
         .then(({ user }) => {
-            return UserDbController.create(user)//Create user in firebase
+            return UserController.create(user)//Create user in firebase
         });
 }
 

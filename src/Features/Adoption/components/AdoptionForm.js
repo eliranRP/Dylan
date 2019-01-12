@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { TouchableOpacity, View, TextInput, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
 import { Icon } from 'react-native-elements'
-import { FormComponent, Row } from '../../../Components/common'
-import Footer from '../../../Components/common/Containers/Footer';
+import { FormComponent, Footer } from '../../../Components/common'
+import { Actions } from 'react-native-router-flux';
+
 
 
 
@@ -24,6 +25,7 @@ export default class AdoptionForm extends Component {
                     style={styles.KeyboardAvoidingView}
                     enabled
                     behavior={Platform.OS === 'ios' ? 'padding' : ''}>
+
                     <ScrollView style={styles.scrollView}>
                         <FormComponent
                             label='Title'
@@ -46,8 +48,6 @@ export default class AdoptionForm extends Component {
                         </View>
                         <View style={{ height: 200 }} />
                     </ScrollView>
-
-
                     <Footer style={{ left: 0 }}>
                         <TouchableOpacity>
                             <Icon
@@ -58,7 +58,9 @@ export default class AdoptionForm extends Component {
                                 type='feather'
                                 color='red' />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => Actions.dogGallery()}
+                        >
                             <Icon
                                 size={35}
                                 raised
@@ -68,9 +70,9 @@ export default class AdoptionForm extends Component {
                         </TouchableOpacity>
                     </Footer>
                 </KeyboardAvoidingView>
-
             </View>
         )
+
     }
 }
 const styles = {

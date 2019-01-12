@@ -3,9 +3,14 @@ import { View, Text } from 'react-native'
 import { connect } from 'react-redux';
 import { FormComponent, Spinner } from '../../../Components/common'
 import { Button } from 'react-native-elements'
-import { emailChanged, passwordChanged, signInOrLogin } from '../actions/AuthActions'
+import { emailChanged, passwordChanged, signInOrLogin,onAuthChange } from '../actions/AuthActions'
+
 
 class LoginForm extends Component {
+
+    componentWillMount(){
+        this.props.onAuthChange()
+    }
 
     _onEmailChange(text) {
         this.props.emailChanged(text);
@@ -105,5 +110,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, {
-    emailChanged, passwordChanged, signInOrLogin
+    emailChanged, passwordChanged, signInOrLogin,onAuthChange
 })(LoginForm);

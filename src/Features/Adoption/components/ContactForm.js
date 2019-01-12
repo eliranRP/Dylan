@@ -5,6 +5,8 @@ import { FormComponent, Footer, Col } from '../../../Components/common'
 import Colors from '../../../res/values/colors'
 import { checkboxUpdated, contactNameChanged, phoneChanged } from '../actions/contactFormAction'
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+
 
 class ContactForm extends Component {
 
@@ -108,7 +110,9 @@ class ContactForm extends Component {
                     <Divider style={{ marginTop: 5, marginBottom: 5 }} />
                 </ScrollView>
                 <Footer>
-                    <TouchableOpacity >
+                    <TouchableOpacity
+                        onPress={() => Actions.AdoptionForm()}
+                    >
                         <Icon
                             size={35}
                             raised

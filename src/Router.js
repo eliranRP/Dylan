@@ -12,15 +12,16 @@ const RouterComponent = () => {
         <Router>
             <Scene key='root' hideNavBar>
                 <Scene key="auth">
-                    <Scene key="login" component={LoginContainer} title="Please Login" initial />
+
+                    <Scene key="login" component={LoginContainer} title="Please Login" />
                 </Scene>
                 <Scene key="main">
-                    <Scene key="feed" component={Feed}></Scene>
+                    <Scene key="feed" component={Feed} />
                 </Scene>
                 <Scene key="addPost">
-                    <Scene initial key="contactForm" component={ContactForm} back  leftTitle="Save"></Scene>
-                    <Scene key="AdoptionForm" component={AdoptionForm} back rightTitle="Save"></Scene>
-                    <Scene key="dogGallery" component={Gallery} back rightTitle="Save"></Scene>
+                    <Scene key="contactForm" component={ContactForm} back leftTitle="Save" initial />
+                    <Scene key="AdoptionForm" component={AdoptionForm} back rightTitle="Save" />
+                    <Scene key="dogGallery" component={Gallery} back rightTitle="Save" />
                 </Scene>
             </Scene>
         </Router>
